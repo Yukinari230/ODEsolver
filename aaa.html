@@ -1,0 +1,54 @@
+<html>
+
+
+
+
+
+<head>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+<div id='myDiv'></div>
+<script>
+t=0;dt=0.1;
+
+
+function loop(){
+
+var size = 15, x = new Array(size), y = new Array(size), z = new Array(size), i, j;
+
+for(var i = 0; i < size; i++) {
+	x[i] = y[i] = i;
+  	z[i] = new Array(size);
+}
+
+for(var i = 0; i < size; i++) {
+  	for(j = 0; j < size; j++) {
+xx=x[i]*Math.cos(t)-y[j]*Math.sin(t);
+yy=x[i]*Math.sin(t)+y[j]*Math.cos(t);
+a=2+t
+zz=xx/3+2*Math.sin(a/3*yy);
+    	z[i][j] = zz ;
+ 	}
+}
+
+var data = [ {z: z,x: x,y: y,type: 'surface'
+	}
+];
+
+Plotly.newPlot('myDiv', data,{width:600,height:600});
+
+t=t+dt;
+requestAnimationFrame(loop);
+}
+loop();
+
+
+</script>
+</body>
+
+
+
+
+
+</html>
